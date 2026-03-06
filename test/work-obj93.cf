@@ -1,0 +1,16 @@
+v 4
+file . "maintest.vhd" "ae4517b9d68e4deb2309b3d5e3d0a74cc8e19bd0" "20260306102209.361":
+  entity main at 1( 0) + 0 on 19;
+  architecture structural of main at 17( 477) + 0 on 20;
+file . "elisatest.vhd" "84e6c33b489d65ddafa7d9ad4b512cd376006389" "20260306102209.361":
+  entity elisacu at 1( 0) + 0 on 17;
+  architecture behavioral of elisacu at 23( 776) + 0 on 18;
+file . "displaycontroltest.vhd" "efce0f82ac97ea40e6c20a81b57fdc3f68c7ec9e" "20260306102209.360":
+  entity displaycontrol at 1( 0) + 0 on 15;
+  architecture behavioral of displaycontrol at 18( 539) + 0 on 16;
+file . "debouncertest.vhd" "fbcf17666322ad3bf5402ec8859cffaee98c6399" "20260306102209.360":
+  entity debouncer at 1( 0) + 0 on 13;
+  architecture behavioral of debouncer at 18( 328) + 0 on 14;
+file . "7segmenttest.vhd" "fd1e172c1f32b68c99dd441d548a391c2272ac78" "20260306102209.360":
+  entity sevensegment at 1( 0) + 0 on 11;
+  architecture behavioral of sevensegment at 17( 408) + 0 on 12;

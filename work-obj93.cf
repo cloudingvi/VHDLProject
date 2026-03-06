@@ -1,0 +1,25 @@
+v 4
+file . "TBiacCU.vhd" "e61679ce31a2bc559a5d888c0128a7861c6620ce" "20260305185834.165":
+  entity tb_giovannicu at 1( 0) + 0 on 47;
+  architecture sim of tb_giovannicu at 8( 114) + 0 on 48;
+file . "FSregister.vhd" "65e14f9b9009fca422589e5cd90e1c8be74d8f2d" "20260306111103.048":
+  entity fsregister at 1( 0) + 0 on 71;
+  architecture behavioral of fsregister at 17( 445) + 0 on 72;
+file . "debouncer.vhd" "fbcf17666322ad3bf5402ec8859cffaee98c6399" "20260306111103.046":
+  entity debouncer at 1( 0) + 0 on 65;
+  architecture behavioral of debouncer at 18( 328) + 0 on 66;
+file . "displayControl.vhd" "efce0f82ac97ea40e6c20a81b57fdc3f68c7ec9e" "20260306111103.047":
+  entity displaycontrol at 1( 0) + 0 on 67;
+  architecture behavioral of displaycontrol at 18( 539) + 0 on 68;
+file . "elia_CUnegatti.vhd" "f4f77d6fe509bbf8f50410a89f397e44c69825d3" "20260306111103.047":
+  entity elisacu at 1( 0) + 0 on 69;
+  architecture behavioral of elisacu at 21( 711) + 0 on 70;
+file . "iacCU.vhd" "f5ed22acc3ba6119117790c1cfba56868df174d1" "20260306111103.048":
+  entity giovannicu at 1( 0) + 0 on 73;
+  architecture behavioral of giovannicu at 23( 722) + 0 on 74;
+file . "7segment.vhd" "fd1e172c1f32b68c99dd441d548a391c2272ac78" "20260306111103.046":
+  entity sevensegment at 1( 0) + 0 on 63;
+  architecture behavioral of sevensegment at 17( 408) + 0 on 64;
+file . "main.vhd" "947f70d8f89cb72177f4696b3913af3ecff48671" "20260306111103.048":
+  entity main at 1( 0) + 0 on 75;
+  architecture structural of main at 17( 477) + 0 on 76;
