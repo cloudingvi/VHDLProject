@@ -7,6 +7,7 @@ entity elisaCU is
         clk : in std_logic;
         reset : in std_logic;
 
+        start : in std_logic; -- input from switches
         enable, go : in std_logic; -- input signals from the other CU
         P1, P2, P3, P4 : in std_logic; -- button inputs
         false_start : in std_logic_vector(3 downto 0); -- vector from the PIPO register
@@ -20,7 +21,7 @@ end elisaCU;
 
 architecture behavioral of elisaCU is
 
-    type state_type is (IDLE, CHECK_FS, CHECK_W);
+    type state_type is (IDLE, CHECK_FS, CHECK_W, ENDING);
     signal state : state_type := IDLE;
 
 begin
@@ -54,11 +55,11 @@ begin
 
                 when CHECK_FS =>
                     resetFS <= '0';
-                    if go = '1' then
-                        state <= CHECK_W;
-                    elsif false_start = "1111" then
+                    if false_start = "1111" then
                         ts <= '1';
-                        state <= IDLE;
+                        state <= ENDING;
+                    elsif go = '1' then
+                        state <= CHECK_W;
                     else
                         if P1 = '0' then
                             fs1 <= '1';
@@ -78,21 +79,26 @@ begin
                     if (P1 = '0' and false_start(0) = '0') then
                         won <= '1';
                         winner <= "00";
-                        state <= IDLE;
+                        state <= ENDING;
                     elsif (P2 = '0' and false_start(1) = '0') then
                         won <= '1';
                         winner <= "01";
-                        state <= IDLE;
+                        state <= ENDING;
                     elsif (P3 = '0' and false_start(2) = '0') then
                         won <= '1';
                         winner <= "10";
-                        state <= IDLE;
+                        state <= ENDING;
                     elsif (P4 = '0' and false_start(3) = '0') then
                         won <= '1';
                         winner <= "11";
-                        state <= IDLE;
+                        state <= ENDING;
                     end if;
 
+                when ENDING =>
+                    if start = '0' then
+                        state <= IDLE;
+                    end if;
+            
                 when others =>
                     state <= IDLE;
             end case;
