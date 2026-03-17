@@ -226,7 +226,7 @@ begin
         -- asynchronous global reset
         if reset = '1' then
             count := (others => '1');
-            blink <= '0';
+            endB <= '0';
 
         elsif rising_edge(clock) then
 
