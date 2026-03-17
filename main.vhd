@@ -250,7 +250,7 @@ begin
             
             -- if not enabled, timer sure hasn't finished
             else
-                endT <= '0';
+                endB <= '0';
             end if;
         end if;
     end process;
