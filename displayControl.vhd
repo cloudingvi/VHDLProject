@@ -17,7 +17,7 @@ end displayControl;
 
 architecture behavioral of displayControl is
 
-    type state_type is (IDLE, HELLO_STATE, WAITING, FALSE_STARTS, WINNERS, TS);
+    type state_type is (IDLE, HELLO_STATE, WAITING, FALSE_STARTS, WINNERS, FS);
     signal state : state_type := IDLE;
 
 begin
@@ -86,7 +86,7 @@ begin
                     if go = '1' then
                         state <= WINNERS;
                     elsif false_start = "1111" then
-                        state <= TS;
+                        state <= FS;
                     end if;
 
                 when WINNERS =>
@@ -119,7 +119,7 @@ begin
                         state <= IDLE;
                     end if;
                 
-                when TS => 
+                when FS => 
                     if hello = '1' then
                         state <= HELLO_STATE;
                     end if;

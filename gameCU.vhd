@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity giovanniCU is
+entity gameCU is
     port (
         clk : in std_logic;
         reset : in std_logic;
@@ -13,18 +13,18 @@ entity giovanniCU is
 
         endT : in std_logic; -- timer end signal
         enableT, resetT : out std_logic; -- timer control signals
+
         endB : in std_logic; -- blink signal for festive LEDs
         enableB, resetB : out std_logic; -- blink control signals
 
-        won, ts : in std_logic; -- input signals from the other CU
-        winner : in std_logic_vector(1 downto 0); -- winner signal from the other CU
+        won, fs : in std_logic; -- input signals from the other CU
         hello, enable, go : out std_logic -- output signals to the other CU
     );
-end giovanniCU;
+end gameCU;
 
-architecture behavioral of giovanniCU is
+architecture behavioral of gameCU is
 
-    type state_type is (IDLE, START_STATE, ZERO, A, B, C, D, GO_STATE, TS_STATE, ENDING);
+    type state_type is (IDLE, START_STATE, ZERO, A, B, C, D, GO_STATE, FS_STATE, ENDING);
     signal state : state_type := IDLE;
 
     signal buttonAnd : std_logic; -- signal that is high when all 4 buttons are pressed
@@ -107,8 +107,8 @@ begin
                     if endT = '1' then
                         state <= A;
                         resetT <= '1';
-                    elsif ts = '1' then
-                        state <= TS_STATE;
+                    elsif fs = '1' then
+                        state <= FS_STATE;
                         resetT <= '1';
                     end if;
 
@@ -118,8 +118,8 @@ begin
                     if endT = '1' then
                         state <= B;
                         resetT <= '1';
-                    elsif ts = '1' then
-                        state <= TS_STATE;
+                    elsif fs = '1' then
+                        state <= FS_STATE;
                         resetT <= '1';
                     end if;
 
@@ -129,8 +129,8 @@ begin
                     if endT = '1' then
                         state <= C;
                         resetT <= '1';
-                    elsif ts = '1' then
-                        state <= TS_STATE;
+                    elsif fs = '1' then
+                        state <= FS_STATE;
                         resetT <= '1';
                     end if;
                 
@@ -140,8 +140,8 @@ begin
                     if endT = '1' then
                         state <= D;
                         resetT <= '1';
-                    elsif ts = '1' then
-                        state <= TS_STATE;
+                    elsif fs = '1' then
+                        state <= FS_STATE;
                         resetT <= '1';
                     end if;
 
@@ -150,8 +150,8 @@ begin
                     led <= "1111111111111111";
                     if endT = '1' then
                         resetT <= '1';
-                        if ts = '1' then
-                            state <= TS_STATE;
+                        if fs = '1' then
+                            state <= FS_STATE;
                             resetT <= '1';
                         else
                             state <= GO_STATE;
@@ -166,11 +166,11 @@ begin
                     go <= '1';
                     if won = '1' then
                         state <= ENDING;
-                    elsif ts = '1' then
-                        state <= TS_STATE;
+                    elsif fs = '1' then
+                        state <= FS_STATE;
                     end if;
 
-                when TS_STATE =>
+                when FS_STATE =>
                     --led <= "1100000000000000";
                     go <= '0';
                     if start = '0' then

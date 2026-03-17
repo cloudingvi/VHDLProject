@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity elisaCU is
+entity checkCU is
     port (
         clk : in std_logic;
         reset : in std_logic;
@@ -12,14 +12,14 @@ entity elisaCU is
         P1, P2, P3, P4 : in std_logic; -- button inputs
         false_start : in std_logic_vector(3 downto 0); -- vector from the PIPO register
         
-        won, ts : out std_logic; -- output signals to the other CU
+        won, fs : out std_logic; -- output signals to the other CU
         winner : out std_logic_vector(1 downto 0); -- winner signal to the other CU
         fs1, fs2, fs3, fs4 : out std_logic; -- parallel set signals to the PIPO register
         resetFS : out std_logic -- reset signal to the PIPO register
     );
-end elisaCU;
+end checkCU;
 
-architecture behavioral of elisaCU is
+architecture behavioral of checkCU is
 
     type state_type is (IDLE, CHECK_FS, CHECK_W, ENDING);
     signal state : state_type := IDLE;
@@ -31,7 +31,7 @@ begin
         if reset = '1' then
             state <= IDLE;
             won <= '0';
-            ts <= '0';
+            fs <= '0';
             winner <= "00"; -- can be any value, because it's not displayed
             fs1 <= '0';
             fs2 <= '0';
@@ -47,7 +47,7 @@ begin
                     fs2 <= '0';
                     fs3 <= '0';
                     fs4 <= '0';
-                    ts <= '0';
+                    fs <= '0';
                     won <= '0';
                     if enable = '1' then
                         state <= CHECK_FS;
@@ -56,7 +56,7 @@ begin
                 when CHECK_FS =>
                     resetFS <= '0';
                     if false_start = "1111" then
-                        ts <= '1';
+                        fs <= '1';
                         state <= ENDING;
                     elsif go = '1' then
                         state <= CHECK_W;

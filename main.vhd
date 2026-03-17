@@ -40,18 +40,18 @@ begin
     start <= switches(15); -- using the last switch as a start signal
 
     -- assigning buttons
-    buttons(0) <= btnU;
-    buttons(1) <= btnL;
-    buttons(2) <= btnD;
-    buttons(3) <= btnR;
-    buttons(4) <= btnC;
+    buttons(0) <= btnC;
+    buttons(1) <= btnU;
+    buttons(2) <= btnL;
+    buttons(3) <= btnD;
+    buttons(4) <= btnR;
 
     -- debouncers
     player1 : entity work.debouncer
         port map (
             clock => clock,
             reset => reset,
-            bouncy => buttons(0),
+            bouncy => buttons(1),
             debounced => P1
         );
     
@@ -59,7 +59,7 @@ begin
         port map (
             clock => clock,
             reset => reset,
-            bouncy => buttons(1),
+            bouncy => buttons(2),
             debounced => P2
         );
     
@@ -67,7 +67,7 @@ begin
         port map (
             clock => clock,
             reset => reset,
-            bouncy => buttons(2),
+            bouncy => buttons(3),
             debounced => P3
         );
         
@@ -75,12 +75,39 @@ begin
         port map (
             clock => clock,
             reset => reset,
-            bouncy => buttons(3),
+            bouncy => buttons(4),
             debounced => P4
         );
     
     -- control units
-    elisa : entity work.elisaCU
+    gameCU : entity work.gameCU
+        port map (
+            clk => clock,
+            reset => reset,
+
+            P1 => P1,
+            P2 => P2,
+            P3 => P3,
+            P4 => P4,
+            start => start,
+            led => led,
+
+            endT => endT,
+            enableT => enableT,
+            resetT => resetT,
+
+            endB => endB,
+            enableB => enableB,
+            resetB => resetB,
+
+            won => won,
+            ts => ts,
+            hello => hello,
+            enable => enable,
+            go => go
+        );
+    
+    checkCU : entity work.checkCU
         port map (
             clk => clock,
             reset => reset,
@@ -104,35 +131,8 @@ begin
             resetFS => resetFS
         );
     
-    giovanni : entity work.giovanniCU
-        port map (
-            clk => clock,
-            reset => reset,
-
-            P1 => P1,
-            P2 => P2,
-            P3 => P3,
-            P4 => P4,
-            start => start,
-            led => led,
-
-            endT => endT,
-            enableT => enableT,
-            resetT => resetT,
-            endB => endB,
-            enableB => enableB,
-            resetB => resetB,
-
-            won => won,
-            ts => ts,
-            winner => winner,
-            hello => hello,
-            enable => enable,
-            go => go
-        );
-    
     -- display control and 7-segment display
-    display : entity work.displayControl
+    displayControl : entity work.displayControl
         port map (
             clk => clock,
             reset => reset,
