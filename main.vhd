@@ -101,7 +101,7 @@ begin
             resetB => resetB,
 
             won => won,
-            ts => ts,
+            fs => fs,
             hello => hello,
             enable => enable,
             go => go
@@ -122,7 +122,7 @@ begin
             false_start => false_start,
 
             won => won,
-            ts => ts,
+            fs => fs,
             winner => winner,
             fs1 => fs1,
             fs2 => fs2,
