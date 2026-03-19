@@ -20,7 +20,7 @@ architecture structural of main is
     signal buttons : std_logic_vector(4 downto 0); -- button inputs
     signal P1, P2, P3, P4 : std_logic; -- (debounced) button inputs
 
-    signal hello, enable, go, ts, won : std_logic; -- control signals between the CUs
+    signal hello, enable, go, fs, won : std_logic; -- control signals between the CUs
     signal winner : std_logic_vector(1 downto 0); -- winner of the game
 
     signal fs1, fs2, fs3, fs4 : std_logic; -- false start signals to the PIPO register
