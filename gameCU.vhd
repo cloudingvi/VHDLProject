@@ -171,7 +171,7 @@ begin
                     end if;
 
                 when FS_STATE =>
-                    --led <= "1100000000000000";
+                    led <= "00000000000000";
                     go <= '0';
                     if start = '0' then
                         state <= IDLE;

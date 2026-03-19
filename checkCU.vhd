@@ -37,7 +37,7 @@ begin
             fs2 <= '0';
             fs3 <= '0';
             fs4 <= '0';
-            resetFS <= '1';  -- reset the PIPO register
+            resetFS <= '1';
         
         elsif rising_edge(clk) then
             case state is
